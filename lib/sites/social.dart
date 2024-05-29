@@ -81,10 +81,9 @@ mixin _social {
 
   static Link _parseLink(Element e) {
     var attr = e.attributes;
-    var quality = e.querySelector('span')?.text ?? e.text;
 
     return Link(
-      quality: quality,
+      quality: attr['data-quality'] ?? e.text,
       link: attr['href']!,
       type: attr['data-type'],
     );
@@ -104,7 +103,7 @@ mixin _social {
     String? title = info?.querySelector(".title")?.text;
     String? duration = info?.querySelector(".duration")?.text;
 
-    var linkGroup = info?.querySelectorAll('.link-group a') ?? [];
+    var linkGroup = body.querySelectorAll('.link-group a');
 
     var links = <Link>[];
 
